@@ -1,19 +1,36 @@
 package lib;
-
 public class PasswordValidator {
-
     /**
-     * คุณจะต้องเขียน Javadoc ที่สมบูรณ์ที่นี่ในอนาคต
-     * เพื่ออธิบายกฎการทำงานของเมธอด
+     * Create the password.
+     * @param enter the string to create the password.
+     * @return the password is valid.
+     * @throws IllegalArgumentException if the password length is less than 8.
      */
-    // TODO: แก้ไข return type ของเมธอดนี้ให้ถูกต้อง
-    public static void validate(String password) { // Function Type ให้เป็น PasswordStrength 
-        
-        // ส่วนของ Implementation ที่คุณต้องเขียน
-        // ...
-        
-        int minLength = 8 // TODO: มีอะไรขาดหายไปที่บรรทัดนี้?
-        
-        return null ; // TODO: การคืนค่านี้ถูกต้องหรือไม่?
-    }
+        public static PasswordStrength validate(String password) {
+            int minLength = 8;
+            if (password.length() < minLength) {
+                return PasswordStrength.INVALID;
+            }
+            boolean upper = false, lower = false, digit = false, special = false;
+            for (char c : password.toCharArray()) {
+                if (Character.isUpperCase(c)) upper = true;
+                else if (Character.isLowerCase(c)) lower = true;
+                else if (Character.isDigit(c)) digit = true;
+                else special = true;
+            }
+            int check = 0;
+            if (upper) {check++;}
+            if (lower) {check++;}
+            if (digit) {check++;}
+            if (special) {check++;}
+            if (check < 2) {
+                return PasswordStrength.WEAK;
+            }
+            else if (check == 2) {
+                return PasswordStrength.MEDIUM;
+            }
+            else {
+                return PasswordStrength.STRONG;
+            }
+        }
 }
