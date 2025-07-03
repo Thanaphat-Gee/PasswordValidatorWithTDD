@@ -1,7 +1,7 @@
 package lib;
 public class PasswordValidator {
     /**
-     * Create the password.
+     * Check the password valiable.
      * @param enter the string to create the password.
      * @return the password is valid.
      * @throws IllegalArgumentException if the password length is less than 8.
